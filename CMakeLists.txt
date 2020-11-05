@@ -14,26 +14,29 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # =============================================================================
 
 # =============================================================================
+# Get the source directories.
+include_directories(Source/Includes)
+file(GLOB SOURCES "Source/Source/*.cpp")
+# =============================================================================
+
+# =============================================================================
 # Set the compiler flags.
 if(WIN32)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /W4 /WX")
 endif()
 if(UNIX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Werror -Wall -Wextra -Weffc++")
-    if(ENGINE_CONFIG)
+    if(ENGINE_DEBUG)
         set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ggdb")
     endif()
 endif()
 # =============================================================================
 
 # =============================================================================
-add_subdirectory(Source/Source)
-add_subdirectory(Source/Include)
-# =============================================================================
-
-# =============================================================================
 # Set the engine version.
 set(ENGINE_VERSION_MAJOR 1)
-set(ENGINE_VERSOIN_MINOR 0)
+set(ENGINE_VERSION_MINOR 0)
 set(ENGINE_VERSION_PATCH 0)
+# Adds the executable.
+add_executable("Game" ${SOURCES})
 # =============================================================================
