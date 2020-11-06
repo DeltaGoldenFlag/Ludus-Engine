@@ -25,14 +25,14 @@ namespace Ludus
         UNREFERENCED(name);
     }
 
-    void Node::AddChild(std::shared_ptr<Node> &child)
+    void Node::AddChild(Node &child)
     {
         UNREFERENCED(child);
     }
 
-    const std::shared_ptr<Node> &Node::GetParent() const
+    const Node &Node::GetParent() const
     {
-        return parent_;
+        return *parent_;
     }
 
     const std::string& Node::GetName() const
@@ -40,30 +40,52 @@ namespace Ludus
         return name_;
     }
 
-    std::shared_ptr<Node> Node::GetParent()
+    Node Node::GetParent()
     {
-        return parent_;
+        return Node();
     }
 
-    const std::shared_ptr<Node> &Node::At(const unsigned &i) const
-    {
-        UNREFERENCED(i);
-        return parent_;
-    }
-
-    std::shared_ptr<Node> Node::At(const unsigned &i)
+    const Node &Node::At(const unsigned &i) const
     {
         UNREFERENCED(i);
-        return std::make_shared<Node>("");
+        return *parent_;
     }
 
-    const std::shared_ptr<Node> &Node::operator[](const unsigned &i) const
+    Node Node::At(const unsigned &i)
+    {
+        UNREFERENCED(i);
+        return Node();
+    }
+
+    const Node &Node::operator[](const unsigned &i) const
     {
         return At(i);
     }
 
-    std::shared_ptr<Node> Node::operator[](const unsigned &i)
+    Node Node::operator[](const unsigned &i)
     {
         return At(i);
+    }
+
+    const Node &Node::At(const std::string &name) const
+    {
+        UNREFERENCED(name);
+        return *parent_;
+    }
+
+    Node Node::At(const std::string &name)
+    {
+        UNREFERENCED(name);
+        return Node();
+    }
+
+    const Node &Node::operator[](const std::string &name) const
+    {
+        return At(name);
+    }
+
+    Node Node::operator[](const std::string &name)
+    {
+        return At(name);
     }
 }

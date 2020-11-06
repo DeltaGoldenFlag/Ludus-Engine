@@ -36,27 +36,27 @@ TEST_CASE("Testing the parent child relationships")
     using Ludus::Node;
     SECTION("The simplest test")
     {
-        std::shared_ptr<Node> parent = std::make_shared<Node>("Parent");
-        std::shared_ptr<Node> child = std::make_shared<Node>("Child");
+        Node parent("Parent");
+        Node child("Child");
         
-        parent->AddChild(child);
-        REQUIRE(child->GetParent()->GetName() == parent->GetName());
+        parent.AddChild(child);
+        REQUIRE(child.GetParent().GetName() == parent.GetName());
     }
 
     SECTION("Doing more tree traversal")
     {
-        std::shared_ptr<Node> parent = std::make_shared<Node>("Parent");
+        Node parent("Parent");
         for(int i = 0; i < 3; ++i)
         {
-            std::shared_ptr<Node> child = std::make_shared<Node>("Child-" + std::to_string(i));
+            Node child("Child-" + std::to_string(i));
             for(int j = 0; j < 3; ++j)
             {
-                std::shared_ptr<Node> grandChild = std::make_shared<Node>("Grand-Child-" + std::to_string(i));
-                child->AddChild(grandChild);
-                REQUIRE(grandChild->GetParent()->GetName() == child->GetName());
+                Node grandChild(("Grand-Child-" + std::to_string(i)));
+                child.AddChild(grandChild);
+                REQUIRE(grandChild.GetParent().GetName() == child.GetName());
             }
-            parent->AddChild(child);
-            REQUIRE(child->GetParent()->GetName() == parent->GetName());
+            parent.AddChild(child);
+            REQUIRE(child.GetParent().GetName() == parent.GetName());
         }
     }
 }
@@ -67,15 +67,38 @@ TEST_CASE("Traversing using an index.")
     SECTION("Traversing the node using indices")
     {
         std::string names[] = { "Child1", "Child2", "Child3" };
-        std::shared_ptr<Node> parent = std::make_shared<Node>("Parent");
+        Node parent("Parent");
+        const Node &ref = parent;
         for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
         {
-            auto child = std::make_shared<Node>(names[i]);
-            parent->AddChild(child);
+            Node child(names[i]);
+            parent.AddChild(child);
         }
         for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
         {
-            REQUIRE(parent->At(i)->GetName() == names[i]);
+            REQUIRE(ref.At(i).GetName() == names[i]);
+            REQUIRE(ref[i].GetName() == names[i]);
+            REQUIRE(parent.At(i).GetName() == names[i]);
+            REQUIRE(parent[i].GetName() == names[i]);
+        }
+    }
+
+    SECTION("Traversing the node using names")
+    {
+        std::string names[] = { "Child1", "Child2", "Child3" };
+        Node parent("Parent");
+        const Node &ref = parent;
+        for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
+        {
+            Node child(names[i]);
+            parent.AddChild(child);
+        }
+        for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
+        {
+            REQUIRE(ref.At(names[i]).GetName() == names[i]);
+            REQUIRE(ref[names[i]].GetName() == names[i]);
+            REQUIRE(parent.At(names[i]).GetName() == names[i]);
+            REQUIRE(parent[names[i]].GetName() == names[i]);
         }
     }
 }

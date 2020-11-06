@@ -19,7 +19,6 @@
 /* ========================================================================= */
 /* Includes */
 /* ========================================================================= */
-#include <memory>
 #include <vector>
 #include <string>
 #include "Ludus/System/IObject.hpp"
@@ -40,33 +39,33 @@ namespace Ludus
          * @param name          The name of the node created.
          **/
         /* ================================================================= */
-        explicit Node(const std::string &name);
+        explicit Node(const std::string &name = std::string());
         /* ================================================================= */
         /**
          * Adds a child to this node object.
-         * @param child         A pointer to a newly created child. 
+         * @param child         A reference to a newly created child. 
          *                      This function uses move semantics and will
          *                      make the pointer copied from invalidated.
          **/
         /* ================================================================= */
-        void AddChild(std::shared_ptr<Node> &child);
+        void AddChild(Node &child);
         
         /* ================================================================= */
         /**
          * Gets a constant pointer to the parent element.
-         * @returns             A constant pointer to the parent element
+         * @returns             A constant reference to the parent element
          *                      of this node.
          **/
         /* ================================================================= */
-        const std::shared_ptr<Node> &GetParent() const;
+        const Node &GetParent() const;
         /* ================================================================= */
         /**
          * Gets a pointer to the parent element.
-         * @returns             A pointer to the parent element
+         * @returns             A copy of the parent element
          *                      of this node.
          **/
         /* ================================================================= */
-        std::shared_ptr<Node> GetParent();
+        Node GetParent();
         /* ================================================================= */
         /**
          * Gets the name of the node.
@@ -81,56 +80,71 @@ namespace Ludus
          * @returns             A constant reference to a shared pointer.
          **/
         /* ================================================================= */
-        const std::shared_ptr<Node> &At(const unsigned &i) const;
+        const Node &At(const unsigned &i) const;
         /* ================================================================= */
         /**
          * Gets a pointer to a child element given an index.
          * @param i             The index to access a child.
-         * @returns             A weak pointer to the object being gotten.
+         * @returns             A copy of the object being gotten.
          **/
         /* ================================================================= */
-        std::shared_ptr<Node> At(const unsigned &i);
+        Node At(const unsigned &i);
         /* ================================================================= */
         /**
          * Gets a pointer to a child element given the name.
          * @param name          The name of the element gotten.
-         * @returns             A constatn referenced to shared pointer
+         * @returns             A constatn reference
          *                      to the child element.
          **/
         /* ================================================================= */
-        const std::shared_ptr<Node> &At(const std::string &name) const;
+        const Node &At(const std::string &name) const;
         /* ================================================================= */
         /**
          * Gets a pointer to the child element given a name.
          * @param name          The name of the element gotten.
-         * @returns             A pointer to element with the name.
+         * @returns             A copy of the element gotten.
          **/
         /* ================================================================= */
-        std::shared_ptr<Node> At(const std::string &name);
+        Node At(const std::string &name);
         /* ================================================================= */
         /**
-         * Gets a constant pointer to a child element given an index.
+         * Gets a constant reference to a child element given an index.
          * @param i             The index to access a child.
-         * @returns             A constant reference to a shared pointer.
+         * @returns             A constant reference to the element gotten.
          **/
         /* ================================================================= */
-        const std::shared_ptr<Node> &operator[](const unsigned &i) const;
+        const Node &operator[](const unsigned &i) const;
         /* ================================================================= */
         /**
-         * Gets a pointer to a child element given an index.
+         * Gets a copy to a child element given an index.
          * @param i             The index to access a child.
-         * @returns             A weak pointer to the object being gotten.
+         * @returns             A copy of the object being gotten.
          **/
         /* ================================================================= */
-        std::shared_ptr<Node> operator[](const unsigned &i);
-
+        Node operator[](const unsigned &i);
+        /* ================================================================= */
+        /**
+         * Gets a constant reference to a child element given it's name.
+         * @param name          The name of the element child to get.
+         * @returns             A constant reference to the element gotten.
+         **/
+        /* ================================================================= */
+        const Node &operator[](const std::string &name) const;
+        /* ================================================================= */
+        /**
+         * Gets a copy of to the child element given it's name.
+         * @param name          The name of the element child to get.
+         * @returns             A copy of the child element indexed.
+         **/
+        /* ================================================================= */
+        Node operator[](const std::string &name);
     private:
         /** The name of the node to identiy it. */
         std::string name_;
         /** The list of children this node has. */
-        std::vector<std::shared_ptr<Node>> children_;
+        std::vector<Node> children_;
         /** The parent node of this element. */
-        std::shared_ptr<Node> parent_;
+        Node *parent_;
     };
 }
 
