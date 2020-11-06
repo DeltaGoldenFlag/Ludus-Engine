@@ -40,7 +40,7 @@ namespace Ludus
          * @param name          The name of the node created.
          **/
         /* ================================================================= */
-        Node(const std::string& name);
+        explicit Node(const std::string &name);
         /* ================================================================= */
         /**
          * Adds a child to this node object.
@@ -49,7 +49,7 @@ namespace Ludus
          *                      make the pointer copied from invalidated.
          **/
         /* ================================================================= */
-        void AddChild(std::unique_ptr<Node> &child);
+        void AddChild(std::shared_ptr<Node> &child);
         
         /* ================================================================= */
         /**
@@ -66,7 +66,14 @@ namespace Ludus
          *                      of this node.
          **/
         /* ================================================================= */
-        std::weak_ptr<Node> GetParent();
+        std::shared_ptr<Node> GetParent();
+        /* ================================================================= */
+        /**
+         * Gets the name of the node.
+         * @returns             The name of the node.
+         **/
+        /* ================================================================= */
+        const std::string& GetName() const;
         /* ================================================================= */
         /**
          * Gets a constant pointer to a child element given an index.
@@ -82,7 +89,24 @@ namespace Ludus
          * @returns             A weak pointer to the object being gotten.
          **/
         /* ================================================================= */
-        std::weak_ptr<Node> At(const unsigned &i);
+        std::shared_ptr<Node> At(const unsigned &i);
+        /* ================================================================= */
+        /**
+         * Gets a pointer to a child element given the name.
+         * @param name          The name of the element gotten.
+         * @returns             A constatn referenced to shared pointer
+         *                      to the child element.
+         **/
+        /* ================================================================= */
+        const std::shared_ptr<Node> &At(const std::string &name) const;
+        /* ================================================================= */
+        /**
+         * Gets a pointer to the child element given a name.
+         * @param name          The name of the element gotten.
+         * @returns             A pointer to element with the name.
+         **/
+        /* ================================================================= */
+        std::shared_ptr<Node> At(const std::string &name);
         /* ================================================================= */
         /**
          * Gets a constant pointer to a child element given an index.
@@ -98,13 +122,13 @@ namespace Ludus
          * @returns             A weak pointer to the object being gotten.
          **/
         /* ================================================================= */
-        std::weak_ptr<Node> operator[](const unsigned &i);
+        std::shared_ptr<Node> operator[](const unsigned &i);
 
     private:
         /** The name of the node to identiy it. */
         std::string name_;
         /** The list of children this node has. */
-        std::vector<std::unique_ptr<Node>> chlidren_;
+        std::vector<std::shared_ptr<Node>> children_;
         /** The parent node of this element. */
         std::shared_ptr<Node> parent_;
     };
