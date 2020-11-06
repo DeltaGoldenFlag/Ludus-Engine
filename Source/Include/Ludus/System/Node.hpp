@@ -21,6 +21,7 @@
 /* ========================================================================= */
 #include <memory>
 #include <vector>
+#include <string>
 #include "Ludus/System/IObject.hpp"
 
 namespace Ludus
@@ -33,6 +34,13 @@ namespace Ludus
     class Node : public IObject
     {
     public:
+        /* ================================================================= */
+        /**
+         * Creates a node with a given name.
+         * @param name          The name of the node created.
+         **/
+        /* ================================================================= */
+        Node(const std::string& name);
         /* ================================================================= */
         /**
          * Adds a child to this node object.
@@ -93,6 +101,8 @@ namespace Ludus
         std::weak_ptr<Node> operator[](const unsigned &i);
 
     private:
+        /** The name of the node to identiy it. */
+        std::string name_;
         /** The list of children this node has. */
         std::vector<std::unique_ptr<Node>> chlidren_;
         /** The parent node of this element. */

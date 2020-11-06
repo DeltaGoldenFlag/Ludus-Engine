@@ -40,5 +40,7 @@ set(ENGINE_VERSION_PATCH 0)
 add_executable(Build ${SOURCES})
 target_include_directories(Build PRIVATE "Source/Include/")
 # Adds the executable for the testing center.
-
+file(GLOB ${SOURCES} "Tests/*.cpp")
+add_executable(Tests ${SOURCES})
+target_include_directories(Tests PRIVATE "Source/Include/")
 # =============================================================================
