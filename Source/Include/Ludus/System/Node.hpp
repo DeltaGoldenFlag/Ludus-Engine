@@ -58,7 +58,7 @@ namespace Ludus
          *                      of this node.
          **/
         /* ================================================================= */
-        std::weak<Node> GetParent();
+        std::weak_ptr<Node> GetParent();
         /* ================================================================= */
         /**
          * Gets a constant pointer to a child element given an index.
@@ -91,7 +91,7 @@ namespace Ludus
          **/
         /* ================================================================= */
         std::weak_ptr<Node> operator[](const unsigned &i);
-        
+
     private:
         /** The list of children this node has. */
         std::vector<std::unique_ptr<Node>> chlidren_;

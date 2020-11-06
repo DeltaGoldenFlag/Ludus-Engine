@@ -36,7 +36,9 @@ endif()
 set(ENGINE_VERSION_MAJOR 1)
 set(ENGINE_VERSION_MINOR 0)
 set(ENGINE_VERSION_PATCH 0)
-# Adds the executable.
+# Adds the executable for the engine.
 add_executable(Build ${SOURCES})
 target_include_directories(Build PRIVATE "Source/Include/")
+# Adds the executable for the testing center.
+
 # =============================================================================

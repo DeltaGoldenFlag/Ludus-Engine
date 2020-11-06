@@ -23,6 +23,8 @@
 /* ========================================================================= */
 /* Includes */
 /* ========================================================================= */
+
+#include "Ludus/Precompile.hpp"
 #include "Ludus/System/IObject.hpp"
 
 namespace Ludus
@@ -33,10 +35,12 @@ namespace Ludus
 
     void IObject::Update(const double &dt)
     {
+        UNREFERENCED(dt);
     }
 
     void IObject::FixedUpdate(const double &fixedDt)
     {
+        UNREFERENCED(fixedDt);
     }
 
     void IObject::PreDraw()
@@ -48,6 +52,10 @@ namespace Ludus
     }
 
     void IObject::PostDraw()
+    {
+    }
+
+    void IObject::DrawGizmo()
     {
     }
 

@@ -1,30 +1,28 @@
 /* ========================================================================= */
 /**
  * @author          David Wong Cascante
- * @file            Engine.hpp
- * @par             
- * @date            11/04/2020
+ * @file            Precompile.hpp
+ * @par             Ludus Engine
+ * @date            11/05/2020
  * 
  * @brief
- * Provides the main entry point into the engine and therefore the game.
- * The engine contains a collection of systems needed to run the engine.
+ * Defines every function every file tends to have.
  **/
 /* ========================================================================= */
 
 /* ========================================================================= */
-#ifndef Engine_MODULE_H
-#define Engine_MODULE_H
+#ifndef Precompile_Name_MODULE_H
+#define Precompile_Name_MODULE_H
 /* ========================================================================= */
 
 /* ========================================================================= */
-/* Includes */
+/**
+ * Marks a variable as unreferenced.
+ * @param x             The variable to mark as unreferenced.
+ **/
 /* ========================================================================= */
-#include "Ludus/Precompile.hpp"
-
-namespace Ludus
-{
-}
+#define UNREFERENCED(x) (void)x
 
 /* ========================================================================= */
-#endif // Engine_MODULE_H
+#endif // Module_Name_MODULE_H
 /* ========================================================================= */
