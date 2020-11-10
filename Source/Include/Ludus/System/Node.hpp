@@ -20,6 +20,7 @@
 /* Includes */
 /* ========================================================================= */
 #include <vector>
+#include <memory>
 #include <string>
 #include <exception>
 #include <memory>
@@ -149,6 +150,23 @@ namespace Ludus
          **/
         /* ================================================================= */
         Node operator[](const unsigned &i);
+        /* ================================================================= */
+        /**
+         * Gets a constant reference to a child element given it's name.
+         * @param name          The name of the element child to get.
+         * @returns             A constant reference to the element gotten.
+         **/
+        /* ================================================================= */
+        const Node &operator[](const std::string &name) const;
+        /* ================================================================= */
+        /**
+         * Gets a copy of to the child element given it's name.
+         * @param name          The name of the element child to get.
+         * @returns             A copy of the child element indexed.
+         **/
+        /* ================================================================= */
+        Node operator[](const std::string &name);
+        
     private:
         /** The name of the node to identiy it. */
         std::string name_;
