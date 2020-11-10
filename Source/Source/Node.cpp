@@ -25,13 +25,13 @@ namespace Ludus
     }
 
     Node::Node(const std::string& name)
+        : name_(name)
     {
-        UNREFERENCED(name);
     }
 
     void Node::AddChild(std::shared_ptr<Node> child)
     {
-        UNREFERENCED(child);
+        children_.push_back(child);
     }
 
     const Node &Node::GetParent() const
@@ -46,7 +46,7 @@ namespace Ludus
 
     Node Node::GetParent()
     {
-        return Node();
+        return Node(*parent_);
     }
 
     const Node &Node::At(const unsigned &i) const
