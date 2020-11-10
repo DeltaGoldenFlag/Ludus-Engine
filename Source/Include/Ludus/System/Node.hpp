@@ -21,10 +21,29 @@
 /* ========================================================================= */
 #include <vector>
 #include <string>
+#include <exception>
+#include <memory>
 #include "Ludus/System/IObject.hpp"
 
 namespace Ludus
 {
+    /* ===================================================================== */
+    /**
+     * The class thrown when the Node fails to get a child node.
+     **/
+    /* ===================================================================== */
+    class NodeNotFound : public std::out_of_range
+    {
+    public:
+        /* ================================================================= */
+        /**
+         * Constructs an exception to class when the node isn't able
+         * to find a child.
+         * @param name              The name of the node not found.
+         **/
+        /* ================================================================= */
+        NodeNotFound(const std::string &name);
+    };
     /* ===================================================================== */
     /**
      * The super class that every hierarchical object belongs to.
@@ -48,7 +67,7 @@ namespace Ludus
          *                      make the pointer copied from invalidated.
          **/
         /* ================================================================= */
-        void AddChild(Node &child);
+        void AddChild(std::shared_ptr<Node> child);
         
         /* ================================================================= */
         /**
@@ -78,34 +97,42 @@ namespace Ludus
          * Gets a constant pointer to a child element given an index.
          * @param i             The index to access a child.
          * @returns             A constant reference to a shared pointer.
+         * @throw NodeNotFound  When the child node was not found at that
+         *                      index.
          **/
         /* ================================================================= */
-        const Node &At(const unsigned &i) const;
+        const Node &At(const unsigned &i) const noexcept(false);
         /* ================================================================= */
         /**
          * Gets a pointer to a child element given an index.
          * @param i             The index to access a child.
          * @returns             A copy of the object being gotten.
+         * @throw NodeNotFound  When the child node was not found at that
+         *                      index.
          **/
         /* ================================================================= */
-        Node At(const unsigned &i);
+        Node At(const unsigned &i) noexcept(false);
         /* ================================================================= */
         /**
          * Gets a pointer to a child element given the name.
          * @param name          The name of the element gotten.
-         * @returns             A constatn reference
+         * @returns             A constant reference
          *                      to the child element.
+         * @throw NodeNotFound  When the child node was not found with that
+         *                      name.
          **/
         /* ================================================================= */
-        const Node &At(const std::string &name) const;
+        const Node &Find(const std::string &name) const noexcept(false);
         /* ================================================================= */
         /**
          * Gets a pointer to the child element given a name.
          * @param name          The name of the element gotten.
          * @returns             A copy of the element gotten.
+         * @throw NodeNotFound  When the child node was not found with that
+         *                      name.
          **/
         /* ================================================================= */
-        Node At(const std::string &name);
+        Node Find(const std::string &name) noexcept(false);
         /* ================================================================= */
         /**
          * Gets a constant reference to a child element given an index.
@@ -122,29 +149,13 @@ namespace Ludus
          **/
         /* ================================================================= */
         Node operator[](const unsigned &i);
-        /* ================================================================= */
-        /**
-         * Gets a constant reference to a child element given it's name.
-         * @param name          The name of the element child to get.
-         * @returns             A constant reference to the element gotten.
-         **/
-        /* ================================================================= */
-        const Node &operator[](const std::string &name) const;
-        /* ================================================================= */
-        /**
-         * Gets a copy of to the child element given it's name.
-         * @param name          The name of the element child to get.
-         * @returns             A copy of the child element indexed.
-         **/
-        /* ================================================================= */
-        Node operator[](const std::string &name);
     private:
         /** The name of the node to identiy it. */
         std::string name_;
         /** The list of children this node has. */
-        std::vector<Node> children_;
+        std::vector<std::shared_ptr<Node>> children_;
         /** The parent node of this element. */
-        Node *parent_;
+        std::shared_ptr<Node> parent_;
     };
 }
 

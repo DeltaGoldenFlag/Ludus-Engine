@@ -37,10 +37,10 @@ TEST_CASE("Testing the parent child relationships")
     SECTION("The simplest test")
     {
         Node parent("Parent");
-        Node child("Child");
+        std::shared_ptr<Node> child = std::make_shared<Node>("Child");
         
         parent.AddChild(child);
-        REQUIRE(child.GetParent().GetName() == parent.GetName());
+        REQUIRE(child->GetParent().GetName() == parent.GetName());
     }
 
     SECTION("Doing more tree traversal")
@@ -48,15 +48,15 @@ TEST_CASE("Testing the parent child relationships")
         Node parent("Parent");
         for(int i = 0; i < 3; ++i)
         {
-            Node child("Child-" + std::to_string(i));
+            std::shared_ptr<Node> child = std::make_shared<Node>("Child-" + std::to_string(i));
             for(int j = 0; j < 3; ++j)
             {
-                Node grandChild(("Grand-Child-" + std::to_string(i)));
-                child.AddChild(grandChild);
-                REQUIRE(grandChild.GetParent().GetName() == child.GetName());
+                std::shared_ptr<Node> grandChild = std::make_shared<Node>(("Grand-Child-" + std::to_string(i)));
+                child->AddChild(grandChild);
+                REQUIRE(grandChild->GetParent().GetName() == child->GetName());
             }
             parent.AddChild(child);
-            REQUIRE(child.GetParent().GetName() == parent.GetName());
+            REQUIRE(child->GetParent().GetName() == parent.GetName());
         }
     }
 }
@@ -71,7 +71,7 @@ TEST_CASE("Traversing using an index.")
         const Node &ref = parent;
         for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
         {
-            Node child(names[i]);
+            std::shared_ptr<Node> child = std::make_shared<Node>(names[i]);
             parent.AddChild(child);
         }
         for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
@@ -80,6 +80,17 @@ TEST_CASE("Traversing using an index.")
             REQUIRE(ref[i].GetName() == names[i]);
             REQUIRE(parent.At(i).GetName() == names[i]);
             REQUIRE(parent[i].GetName() == names[i]);
+        }
+        try
+        {
+            parent.At(-1);
+            /* Failed to throw an exception when an invalid child was not found. */
+            REQUIRE(false);
+        }
+        catch(const Ludus::NodeNotFound& e)
+        {
+            /* We good. */
+            REQUIRE(true);
         }
     }
 
@@ -90,15 +101,24 @@ TEST_CASE("Traversing using an index.")
         const Node &ref = parent;
         for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
         {
-            Node child(names[i]);
+            std::shared_ptr<Node> child = std::make_shared<Node>(names[i]);
             parent.AddChild(child);
         }
         for(unsigned i = 0; i < sizeof(names) / sizeof(names[0]); ++i)
         {
-            REQUIRE(ref.At(names[i]).GetName() == names[i]);
-            REQUIRE(ref[names[i]].GetName() == names[i]);
-            REQUIRE(parent.At(names[i]).GetName() == names[i]);
-            REQUIRE(parent[names[i]].GetName() == names[i]);
+            REQUIRE(ref.Find(names[i]).GetName() == names[i]);
+            REQUIRE(parent.Find(names[i]).GetName() == names[i]);
+        }
+        try
+        {
+            parent.Find("YEEHAW");
+            /* Failed to throw an exception when an invalid child was not found. */
+            REQUIRE(false);
+        }
+        catch(const Ludus::NodeNotFound& e)
+        {
+            /* We good. */
+            REQUIRE(true);
         }
     }
 }

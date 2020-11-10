@@ -16,16 +16,20 @@
 /* ========================================================================= */
 #include "Ludus/Precompile.hpp"
 #include "Ludus/System/Node.hpp"
-#include <exception>
 
 namespace Ludus
 {
+    NodeNotFound::NodeNotFound(const std::string &name)
+        : out_of_range(("Failed to find the child: " + name).c_str())
+    {
+    }
+
     Node::Node(const std::string& name)
     {
         UNREFERENCED(name);
     }
 
-    void Node::AddChild(Node &child)
+    void Node::AddChild(std::shared_ptr<Node> child)
     {
         UNREFERENCED(child);
     }
@@ -67,25 +71,15 @@ namespace Ludus
         return At(i);
     }
 
-    const Node &Node::At(const std::string &name) const
+    const Node &Node::Find(const std::string &name) const
     {
         UNREFERENCED(name);
         return *parent_;
     }
 
-    Node Node::At(const std::string &name)
+    Node Node::Find(const std::string &name)
     {
         UNREFERENCED(name);
         return Node();
-    }
-
-    const Node &Node::operator[](const std::string &name) const
-    {
-        return At(name);
-    }
-
-    Node Node::operator[](const std::string &name)
-    {
-        return At(name);
     }
 }
