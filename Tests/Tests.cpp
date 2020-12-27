@@ -87,7 +87,7 @@ TEST_CASE("Traversing using an index.")
             /* Failed to throw an exception when an invalid child was not found. */
             REQUIRE(false);
         }
-        catch(const Ludus::NodeNotFound& e)
+        catch(const std::out_of_range& e)
         {
             /* We good. */
             REQUIRE(true);

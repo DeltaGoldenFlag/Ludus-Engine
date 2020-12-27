@@ -20,18 +20,19 @@
 namespace Ludus
 {
     NodeNotFound::NodeNotFound(const std::string &name)
-        : out_of_range(("Failed to find the child: " + name).c_str())
+        : std::out_of_range(("Failed to find the child: " + name).c_str())
     {
     }
 
     Node::Node(const std::string& name)
-        : name_(name)
+        : name_(name), parent_(nullptr)
     {
     }
 
     void Node::AddChild(std::shared_ptr<Node> child)
     {
         children_.push_back(child);
+        child->parent_ = this;
     }
 
     const Node &Node::GetParent() const
@@ -51,14 +52,12 @@ namespace Ludus
 
     const Node &Node::At(const unsigned &i) const
     {
-        UNREFERENCED(i);
-        return *parent_;
+        return *children_.at(i);
     }
 
     Node Node::At(const unsigned &i)
     {
-        UNREFERENCED(i);
-        return Node();
+        return *children_.at(i);
     }
 
     const Node &Node::operator[](const unsigned &i) const
@@ -73,13 +72,27 @@ namespace Ludus
 
     const Node &Node::Find(const std::string &name) const
     {
-        UNREFERENCED(name);
-        return *parent_;
+        for(auto iter = children_.cbegin(); iter != children_.cend(); ++iter)
+        {
+            if((*iter)->GetName() == name)
+            {
+                return **iter;
+            }
+        }
+
+        throw NodeNotFound(name);
     }
 
     Node Node::Find(const std::string &name)
     {
-        UNREFERENCED(name);
-        return Node();
+        for(auto iter = children_.cbegin(); iter != children_.cend(); ++iter)
+        {
+            if((*iter)->GetName() == name)
+            {
+                return **iter;
+            }
+        }
+
+        throw NodeNotFound(name);
     }
 }

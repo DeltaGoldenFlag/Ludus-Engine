@@ -173,7 +173,7 @@ namespace Ludus
         /** The list of children this node has. */
         std::vector<std::shared_ptr<Node>> children_;
         /** The parent node of this element. */
-        std::shared_ptr<Node> parent_;
+        Node *parent_;
     };
 }
 
