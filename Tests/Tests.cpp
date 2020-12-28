@@ -16,11 +16,15 @@
 /* ========================================================================= */
 
 #include "Ludus/Precompile.hpp"
-#include "Ludus/System/Node.hpp"
 #include <memory>
 
 #define CATCH_CONFIG_MAIN
 #include "catch2.hpp"
+
+/*  ======================================================================== */
+/*  NODES                                                                    */
+/*  ======================================================================== */
+#include "Ludus/System/Node.hpp"
 
 TEST_CASE("Tests the name setting", "[Node]")
 {
@@ -122,3 +126,9 @@ TEST_CASE("Traversing using an index.")
         }
     }
 }
+
+/*  ======================================================================== */
+/*  ENGINE                                                                   */
+/*  ======================================================================== */
+#include <Ludus/System/Engine.hpp>
+

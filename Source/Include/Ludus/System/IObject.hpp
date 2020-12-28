@@ -70,7 +70,7 @@ namespace Ludus
          *                      frame is taking.
          **/
         /* ================================================================= */
-        virtual void FixedUpdate(const double &dt);
+        virtual void FixedUpdate(const double &fixedDt);
         /* ================================================================= */
         /**
          * Performs any algorithms needed before actually drawing

@@ -171,7 +171,7 @@ namespace Ludus
         /** The name of the node to identiy it. */
         std::string name_;
         /** The list of children this node has. */
-        std::vector<std::shared_ptr<Node>> children_;
+        std::vector<std::shared_ptr<Node> > children_;
         /** The parent node of this element. */
         Node *parent_;
     };
