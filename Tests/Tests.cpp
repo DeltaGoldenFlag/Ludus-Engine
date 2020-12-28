@@ -87,11 +87,11 @@ TEST_CASE("Traversing using an index.")
         }
         try
         {
-            parent.At(-1);
+            parent.At(static_cast<unsigned>(-1));
             /* Failed to throw an exception when an invalid child was not found. */
             REQUIRE(false);
         }
-        catch(const std::out_of_range& e)
+        catch(const std::out_of_range&)
         {
             /* We good. */
             REQUIRE(true);
@@ -119,7 +119,7 @@ TEST_CASE("Traversing using an index.")
             /* Failed to throw an exception when an invalid child was not found. */
             REQUIRE(false);
         }
-        catch(const Ludus::NodeNotFound& e)
+        catch(const Ludus::NodeNotFound&)
         {
             /* We good. */
             REQUIRE(true);

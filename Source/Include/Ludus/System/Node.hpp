@@ -22,7 +22,7 @@
 #include <vector>
 #include <memory>
 #include <string>
-#include <exception>
+#include <stdexcept>
 #include <memory>
 #include "Ludus/System/IObject.hpp"
 
