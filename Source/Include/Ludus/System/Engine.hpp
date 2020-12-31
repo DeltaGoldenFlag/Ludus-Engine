@@ -7,7 +7,9 @@
  * 
  * @brief
  * Provides the main entry point into the engine and therefore the game.
- * The engine contains a collection of systems needed to run the engine.
+ * The engine contains a collection of systems needed to run the engine
+ * that are stored as children.
+ * The enginen is the root of the entire hierarchy.
  **/
 /* ========================================================================= */
 
@@ -20,7 +22,7 @@
 /* Includes */
 /* ========================================================================= */
 #include "Ludus/Precompile.hpp"
-#include "Ludus/System/IObject.hpp"
+#include "Ludus/System/Node.hpp"
 #include <vector>
 #include <memory>
 
@@ -31,7 +33,7 @@ namespace Ludus
      * The engine that drives the entire simulation.
     **/
     /* ===================================================================== */
-    class Engine final : public IObject
+    class Engine final : public Node
     {
     public:
         /* ================================================================= */
@@ -49,7 +51,7 @@ namespace Ludus
          *                          Usually, manually specifying this is not
          *                          desired.
          *                          The system being added must derive
-         *                          from IObject.
+         *                          from Node.
          *                          The system must have a default constructor.
         **/
         /* ================================================================= */
@@ -90,8 +92,6 @@ namespace Ludus
     private:
         /** Keeps track of whether the engine should keep running. */
         bool running_;
-        /** The list of pointers to the systems encompassing the engine. */
-        std::vector<std::unique_ptr<IObject> > systems_;
 
         /* ================================================================= */
         /**

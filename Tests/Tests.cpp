@@ -143,7 +143,7 @@ TEST_CASE("Test the entry point of the engine")
 
     SECTION("Check whether can add addons and access them.")
     {
-        class TestSystem final : public Ludus::IObject
+        class TestSystem final : public Ludus::Node
         {
         };
 
@@ -151,4 +151,74 @@ TEST_CASE("Test the entry point of the engine")
         engine.AddOn<TestSystem>();
         REQUIRE_NOTHROW(engine.Find<TestSystem>());
     }
+
+    SECTION("Check whether can add addons can shut down the engine.")
+    {
+        class TestSystem final : public Ludus::Node
+        {
+        public:
+            virtual void Update(double const &dt) override
+            {
+                UNREFERENCED(dt);
+                /* Get the parent, and shut it down as the engine. */
+                Ludus::Engine *engine = reinterpret_cast<Ludus::Engine *>(&GetParent());
+                engine->Stop();
+                /* The engine should stop running here. */
+                REQUIRE(engine->IsRunning() == false);
+            }
+        };
+
+        Ludus::Engine engine;
+        engine.AddOn<TestSystem>();
+        REQUIRE_NOTHROW(engine.Find<TestSystem>());
+        engine.Run();
+    }
 }
+
+/*  ======================================================================== */
+/*  GRAPHICS                                                                 */
+/*  ======================================================================== */
+#include <Ludus/Graphics/Graphics.hpp>
+#include <Ludus/Graphics/Window.hpp>
+
+TEST_CASE("Testing the Graphics interface.")
+{
+    SECTION("Check whether the engine comes with the graphics package.")
+    {
+        Ludus::Engine engine;
+        REQUIRE_NOTHROW(engine.Find<Ludus::Graphics>());
+    }
+
+    SECTION("Check whether the graphics package comes with default window data.")
+    {
+        Ludus::Engine engine;
+        Ludus::Graphics const &graphics = engine.Find<Ludus::Graphics>();
+        Ludus::Window const &window = graphics.GetWindow();
+        /* Check if we have a valid device type at all. */
+        CHECK(window.GetRenderingAPI() & 
+            (Ludus::Graphics::DeviceType::DIRECTX | Ludus::Graphics::DeviceType::OPENGL));
+        /* Check the dimensions. */
+        CHECK(window.GetWidth() != 0);
+        CHECK(window.GetHeight() != 0);
+        /* The initial window title should be empty. */
+        CHECK(window.GetTitle().empty());
+    }
+
+    SECTION("Check if the user can change the default settings.")
+    {
+        Ludus::Engine engine;
+        Ludus::Graphics &graphics = engine.Find<Ludus::Graphics>();
+        Ludus::Window &window = graphics.GetWindow();
+        /* Set settings other than the default. */
+        const wchar_t* titleSet = L"Testing Title";
+        window.SetRenderingAPI(Ludus::Graphics::DeviceType::DIRECTX);
+        window.SetSwapchainDimensions(500, 500);
+        window.SetTitle(titleSet);
+        /* Check for the changes. */
+        CHECK(window.GetRenderingAPI() == Ludus::Graphics::DeviceType::DIRECTX);
+        CHECK(window.GetWidth() == 500);
+        CHECK(window.GetHeight() == window.GetWidth());
+        CHECK(window.GetTitle() == titleSet);
+    }
+}
+

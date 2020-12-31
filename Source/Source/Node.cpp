@@ -45,9 +45,9 @@ namespace Ludus
         return name_;
     }
 
-    Node Node::GetParent()
+    Node &Node::GetParent()
     {
-        return Node(*parent_);
+        return *parent_;
     }
 
     const Node &Node::At(const unsigned &i) const

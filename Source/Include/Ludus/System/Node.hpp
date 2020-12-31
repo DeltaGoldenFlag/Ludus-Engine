@@ -72,7 +72,7 @@ namespace Ludus
         
         /* ================================================================= */
         /**
-         * Gets a constant pointer to the parent element.
+         * Gets a constant reference to the parent element.
          * @returns             A constant reference to the parent element
          *                      of this node.
          **/
@@ -80,12 +80,12 @@ namespace Ludus
         const Node &GetParent() const;
         /* ================================================================= */
         /**
-         * Gets a pointer to the parent element.
-         * @returns             A copy of the parent element
+         * Gets a reference to the parent element.
+         * @returns             A reference of the parent element
          *                      of this node.
          **/
         /* ================================================================= */
-        Node GetParent();
+        Node &GetParent();
         /* ================================================================= */
         /**
          * Gets the name of the node.

@@ -48,9 +48,9 @@ namespace Ludus
         struct Swapchain
         {
             /* The width of the swap chain. */
-            float width_;
+            unsigned width_;
             /* The height of the swap chain. */
-            float height_;
+            unsigned height_;
         };
 
         /* ============================================================= */
@@ -73,7 +73,8 @@ namespace Ludus
          * @param height                The new height of the swapchain.
          */
         /* ============================================================= */
-        void SetSwapchainDimensions(float width, float height);
+        void SetSwapchainDimensions(
+            unsigned const &width, unsigned const &height);
         /* ============================================================= */
         /**
          * Sets the rendering API to use for the renderer.
@@ -88,14 +89,14 @@ namespace Ludus
          * @returns                     The width of the swapchain.
         **/
         /* ============================================================= */
-        float GetWidth() const;
+        unsigned GetWidth() const;
         /* ============================================================= */
         /**
          * Gets the height of the swapchain.
          * @returns                     The height of the swapchain.
         **/
         /* ============================================================= */
-        float GetHeight() const;
+        unsigned GetHeight() const;
         /* ============================================================= */
         /**
          * Gets the title of the window.

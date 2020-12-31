@@ -57,8 +57,8 @@ namespace Ludus
         /* ================================================================= */
         enum DeviceType
         {
-            OPENGL,  /* Use OpenGL for the rendering device. */
-            DIRECTX, /* Use DirectX for the rendering device. */
+            OPENGL  = 0x01,  /* Use OpenGL for the rendering device. */
+            DIRECTX = 0x02,  /* Use DirectX for the rendering device. */
         };
 
         /* ================================================================= */
@@ -71,10 +71,17 @@ namespace Ludus
         /* ================================================================= */
         /**
          * Gets the window (and swapchain) for the graphics class.
+         * @returns             A constant reference to the window class.
+         **/
+        /* ================================================================= */
+        Window const &GetWindow() const;
+        /* ================================================================= */
+        /**
+         * Gets the window (and swapchain) for the graphics class.
          * @returns             A reference to the window class.
          **/
         /* ================================================================= */
-        Window &GetWindow() const;
+        Window &GetWindow();
     
     private:
         /** The window that holds the context used by the device. */

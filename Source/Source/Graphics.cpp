@@ -40,7 +40,12 @@ namespace Ludus
         window_ = std::make_unique<Window>(settings, swapchain);
     }
 
-    Window &Graphics::GetWindow() const
+    Window const &Graphics::GetWindow() const
+    {
+        return *window_;
+    }
+
+    Window &Graphics::GetWindow()
     {
         return *window_;
     }

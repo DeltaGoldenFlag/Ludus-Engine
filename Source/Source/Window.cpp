@@ -29,7 +29,7 @@ namespace Ludus
         UNREFERENCED(title);
     }
 
-    void Window::SetSwapchainDimensions(float width, float height)
+    void Window::SetSwapchainDimensions(unsigned const &width, unsigned const &height)
     {
         UNREFERENCED(width);
         UNREFERENCED(height);
@@ -40,12 +40,12 @@ namespace Ludus
         UNREFERENCED(api);
     }
 
-    float Window::GetWidth() const
+    unsigned Window::GetWidth() const
     {
         return 0.0f;
     }
 
-    float Window::GetHeight() const
+    unsigned Window::GetHeight() const
     {
         return 0.0f;
     }
