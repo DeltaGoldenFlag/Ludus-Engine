@@ -19,10 +19,12 @@
 // Everyting belongs on the Ludus namespace.
 // #include <memory>
 // Use shared_ptr and unique_ptr instead of raw pointers.
+#include "Ludus/System/IObject.hpp"
+
 namespace Ludus
 {
     // Define final if possible as a C++11 feature.
-    class Dummy final : public LudusObject
+    class Dummy final : public IObject
     {
     public:
         /* ================================================================= */

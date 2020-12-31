@@ -131,4 +131,12 @@ TEST_CASE("Traversing using an index.")
 /*  ENGINE                                                                   */
 /*  ======================================================================== */
 #include <Ludus/System/Engine.hpp>
+#include <Ludus/Graphics/Graphics.hpp>
 
+TEST_CASE("Test the entry point of the engine")
+{
+    SECTION("Test whether the engine runs")
+    {
+
+    }
+}
