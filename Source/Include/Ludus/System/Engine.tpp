@@ -15,6 +15,7 @@
 /* Includes */
 /* ========================================================================= */
 #include <sstream>
+#include <stdexcept>
 
 namespace Ludus
 {
@@ -29,6 +30,6 @@ namespace Ludus
         std::stringstream builder;
         builder << "Failed to find the system ";
         builder << typeid(T).name();
-        throw std::exception(builder.str().c_str());
+        throw std::runtime_error(builder.str().c_str());
     }
 }

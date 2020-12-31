@@ -80,9 +80,9 @@ namespace Ludus
         /** The window that holds the context used by the device. */
         std::unique_ptr<Window> window_;
         /** The graphics device used to create all the assets to render. */
-        std::unique_ptr<Device> device_;
+        //std::unique_ptr<Device> device_;
         /** The rendering device used to draw everything. */
-        std::unique_ptr<Renderer> renderer_;
+        //std::unique_ptr<Renderer> renderer_;
     };
 }
 

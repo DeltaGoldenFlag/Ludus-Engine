@@ -19,8 +19,8 @@
 /* ========================================================================= */
 /* Includes */
 /* ========================================================================= */
-#include "Window.hpp"
-#include "Graphics.hpp"
+#include "Ludus/Graphics/Window.hpp"
+#include "Ludus/Graphics/Graphics.hpp"
 
 namespace Ludus
 {
@@ -37,7 +37,7 @@ namespace Ludus
         swapchain.width_ = 800;
         swapchain.height_ = 600;
 
-        window_ = std::make_unique<Window>(new Window(settings, swapchain));
+        window_ = std::make_unique<Window>(settings, swapchain);
     }
 
     Window &Graphics::GetWindow() const

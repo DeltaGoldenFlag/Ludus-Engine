@@ -14,8 +14,8 @@
 /* ========================================================================= */
 /* Includes */
 /* ========================================================================= */
-#include "Precompile.hpp"
-#include "Window.hpp"
+#include "Ludus/Precompile.hpp"
+#include "Ludus/Graphics/Window.hpp"
 
 namespace Ludus
 {
@@ -52,11 +52,11 @@ namespace Ludus
 
     std::wstring const &Window::GetTitle() const
     {
-        return L"";
+        return settings_.title_;
     }
 
     Graphics::DeviceType const &Window::GetRenderingAPI() const
     {
-        return Graphics::DeviceType::OPENGL;
+        return settings_.device_;
     }
 }

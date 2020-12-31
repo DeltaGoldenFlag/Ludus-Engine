@@ -135,8 +135,20 @@ TEST_CASE("Traversing using an index.")
 
 TEST_CASE("Test the entry point of the engine")
 {
-    SECTION("Test whether the engine runs")
+    SECTION("Test the engine doesn't on creation.")
     {
+        Ludus::Engine engine;
+        REQUIRE(engine.IsRunning() == false);
+    }
 
+    SECTION("Check whether can add addons and access them.")
+    {
+        class TestSystem final : public Ludus::IObject
+        {
+        };
+
+        Ludus::Engine engine;
+        engine.AddOn<TestSystem>();
+        REQUIRE_NOTHROW(engine.Find<TestSystem>());
     }
 }

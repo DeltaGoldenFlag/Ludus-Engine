@@ -72,9 +72,9 @@ namespace Ludus
         /* ================================================================= */
         /**
          * Finds the system with the associated type.
-         * @tparam T                    The type of the system being found.
-         * @returns                     A reference of the system found.
-         * @throw std::exception        If the system was not found at all.
+         * @tparam T                        The type of the system being found.
+         * @returns                         A reference of the system found.
+         * @throw std::runtime_error        If the system was not found at all.
         **/
         /* ================================================================= */
         template <typename T>
