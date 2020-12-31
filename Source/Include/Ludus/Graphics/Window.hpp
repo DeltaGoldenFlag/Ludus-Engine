@@ -47,9 +47,9 @@ namespace Ludus
         /* ============================================================= */
         struct Swapchain
         {
-            /* The width of the swap chain. */
+            /** The width of the swap chain. */
             unsigned width_;
-            /* The height of the swap chain. */
+            /** The height of the swap chain. */
             unsigned height_;
         };
 
