@@ -88,12 +88,12 @@ TEST_CASE("Traversing using an index.")
         try
         {
             parent.At(static_cast<unsigned>(-1));
-            /* Failed to throw an exception when an invalid child was not found. */
+            // Failed to throw an exception when an invalid child was not found.
             REQUIRE(false);
         }
         catch(const std::out_of_range&)
         {
-            /* We good. */
+            // We good.
             REQUIRE(true);
         }
     }
@@ -116,7 +116,7 @@ TEST_CASE("Traversing using an index.")
         try
         {
             parent.Find("YEEHAW");
-            /* Failed to throw an exception when an invalid child was not found. */
+            // Failed to throw an exception when an invalid child was not found.
             REQUIRE(false);
         }
         catch(const Ludus::NodeNotFound&)
@@ -159,11 +159,15 @@ TEST_CASE("Test the entry point of the engine")
         public:
             virtual void Update(double const &dt) override
             {
+                static unsigned updateCount = 0;
                 UNREFERENCED(dt);
-                /* Get the parent, and shut it down as the engine. */
+
+                // Make sure this update function only runs once.
+                REQUIRE(updateCount++ < 1);
+                // Get the parent, and shut it down as the engine.
                 Ludus::Engine *engine = reinterpret_cast<Ludus::Engine *>(&GetParent());
                 engine->Stop();
-                /* The engine should stop running here. */
+                // The engine should stop running here.
                 REQUIRE(engine->IsRunning() == false);
             }
         };
@@ -194,13 +198,13 @@ TEST_CASE("Testing the Graphics interface.")
         Ludus::Engine engine;
         Ludus::Graphics const &graphics = engine.Find<Ludus::Graphics>();
         Ludus::Window const &window = graphics.GetWindow();
-        /* Check if we have a valid device type at all. */
+        // Check if we have a valid device type at all.
         CHECK(window.GetRenderingAPI() & 
             (Ludus::Graphics::DeviceType::DIRECTX | Ludus::Graphics::DeviceType::OPENGL));
-        /* Check the dimensions. */
+        // Check the dimensions.
         CHECK(window.GetWidth() != 0);
         CHECK(window.GetHeight() != 0);
-        /* The initial window title should be empty. */
+        // The initial window title should be empty.
         CHECK(window.GetTitle().empty());
     }
 
@@ -209,12 +213,12 @@ TEST_CASE("Testing the Graphics interface.")
         Ludus::Engine engine;
         Ludus::Graphics &graphics = engine.Find<Ludus::Graphics>();
         Ludus::Window &window = graphics.GetWindow();
-        /* Set settings other than the default. */
+        // Set settings other than the default.
         const wchar_t* titleSet = L"Testing Title";
         window.SetRenderingAPI(Ludus::Graphics::DeviceType::DIRECTX);
         window.SetSwapchainDimensions(500, 500);
         window.SetTitle(titleSet);
-        /* Check for the changes. */
+        // Check for the changes.
         CHECK(window.GetRenderingAPI() == Ludus::Graphics::DeviceType::DIRECTX);
         CHECK(window.GetWidth() == 500);
         CHECK(window.GetHeight() == window.GetWidth());
