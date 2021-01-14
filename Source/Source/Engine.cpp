@@ -24,12 +24,12 @@ namespace Ludus
 
     void Engine::Run()
     {
-        /* Initialize all the systems. */
+        // Initialize all the systems.
         while(running_)
         {
-            /* Update simulation until stopped. */
+            // Update simulation until stopped.
         }
-        /* Stop simulation here. */
+        // Stop simulation here.
     }
 
     void Engine::Stop()

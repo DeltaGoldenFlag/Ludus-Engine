@@ -42,12 +42,12 @@ namespace Ludus
 
     unsigned Window::GetWidth() const
     {
-        return 0.0f;
+        return 0;
     }
 
     unsigned Window::GetHeight() const
     {
-        return 0.0f;
+        return 0;
     }
 
     std::wstring const &Window::GetTitle() const

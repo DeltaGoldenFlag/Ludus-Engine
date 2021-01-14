@@ -221,4 +221,3 @@ TEST_CASE("Testing the Graphics interface.")
         CHECK(window.GetTitle() == titleSet);
     }
 }
-

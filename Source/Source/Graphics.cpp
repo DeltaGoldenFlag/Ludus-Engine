@@ -27,7 +27,7 @@ namespace Ludus
     Graphics::Graphics(DeviceType const &renderAPI) :
         window_()
     {
-        /* Set the default window and swapchain settings for the window. */
+        // Set the default window and swapchain settings for the window.
         Window::Settings settings;
         Window::Swapchain swapchain;
 
