@@ -95,7 +95,7 @@ namespace Ludus
         const std::string& GetName() const;
         /* ================================================================= */
         /**
-         * Gets a constant pointer to a child element given an index.
+         * Gets a constant reference to a child element given an index.
          * @param i             The index to access a child.
          * @returns             A constant reference to a shared pointer.
          * @throw NodeNotFound  When the child node was not found at that
@@ -105,17 +105,17 @@ namespace Ludus
         const Node &At(const unsigned &i) const noexcept(false);
         /* ================================================================= */
         /**
-         * Gets a pointer to a child element given an index.
+         * Gets a reference to a child element given an index.
          * @param i             The index to access a child.
-         * @returns             A copy of the object being gotten.
+         * @returns             A reference of the object being gotten.
          * @throw NodeNotFound  When the child node was not found at that
          *                      index.
          **/
         /* ================================================================= */
-        Node At(const unsigned &i) noexcept(false);
+        Node &At(const unsigned &i) noexcept(false);
         /* ================================================================= */
         /**
-         * Gets a pointer to a child element given the name.
+         * Gets a reference to a child element given the name.
          * @param name          The name of the element gotten.
          * @returns             A constant reference
          *                      to the child element.
@@ -126,14 +126,14 @@ namespace Ludus
         const Node &Find(const std::string &name) const noexcept(false);
         /* ================================================================= */
         /**
-         * Gets a pointer to the child element given a name.
+         * Gets a reference to the child element given a name.
          * @param name          The name of the element gotten.
-         * @returns             A copy of the element gotten.
+         * @returns             A reference of the element gotten.
          * @throw NodeNotFound  When the child node was not found with that
          *                      name.
          **/
         /* ================================================================= */
-        Node Find(const std::string &name) noexcept(false);
+        Node &Find(const std::string &name) noexcept(false);
         /* ================================================================= */
         /**
          * Gets a constant reference to a child element given an index.
@@ -144,12 +144,12 @@ namespace Ludus
         const Node &operator[](const unsigned &i) const;
         /* ================================================================= */
         /**
-         * Gets a copy to a child element given an index.
+         * Gets a reference to a child element given an index.
          * @param i             The index to access a child.
-         * @returns             A copy of the object being gotten.
+         * @returns             A reference of the object being gotten.
          **/
         /* ================================================================= */
-        Node operator[](const unsigned &i);
+        Node &operator[](const unsigned &i);
         /* ================================================================= */
         /**
          * Gets a constant reference to a child element given it's name.
@@ -162,10 +162,10 @@ namespace Ludus
         /**
          * Gets a copy of to the child element given it's name.
          * @param name          The name of the element child to get.
-         * @returns             A copy of the child element indexed.
+         * @returns             A reference of the child element indexed.
          **/
         /* ================================================================= */
-        Node operator[](const std::string &name);
+        Node &operator[](const std::string &name);
         
     private:
         /** The name of the node to identiy it. */

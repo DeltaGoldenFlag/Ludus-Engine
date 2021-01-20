@@ -40,7 +40,7 @@ namespace Ludus
         return *parent_;
     }
 
-    const std::string& Node::GetName() const
+    const std::string &Node::GetName() const
     {
         return name_;
     }
@@ -55,7 +55,7 @@ namespace Ludus
         return *children_.at(i);
     }
 
-    Node Node::At(const unsigned &i)
+    Node &Node::At(const unsigned &i)
     {
         return *children_.at(i);
     }
@@ -65,7 +65,7 @@ namespace Ludus
         return At(i);
     }
 
-    Node Node::operator[](const unsigned &i)
+    Node &Node::operator[](const unsigned &i)
     {
         return At(i);
     }
@@ -83,7 +83,7 @@ namespace Ludus
         throw NodeNotFound(name);
     }
 
-    Node Node::Find(const std::string &name)
+    Node &Node::Find(const std::string &name)
     {
         for(auto iter = children_.cbegin(); iter != children_.cend(); ++iter)
         {
