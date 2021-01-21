@@ -308,6 +308,14 @@ namespace Ludus
          *                      the children list.
         **/
         /* ================================================================= */
+        Iterator const begin() const;
+        /* ================================================================= */
+        /**
+         * Gets the beginning element of the children.
+         * @returns             The iterator pointing to the beginning of
+         *                      the children list.
+        **/
+        /* ================================================================= */
         Iterator const cbegin() const;
         /* ================================================================= */
         /**
@@ -317,6 +325,14 @@ namespace Ludus
         **/
         /* ================================================================= */
         Iterator end();
+        /* ================================================================= */
+        /**
+         * Gets the ending element of the children.
+         * @returns             The iterator pointing to the end of
+         *                      the children list.
+        **/
+        /* ================================================================= */
+        Iterator const end() const;
         /* ================================================================= */
         /**
          * Gets the ending element of the children.
@@ -340,6 +356,14 @@ namespace Ludus
          *                      the children list.
         **/
         /* ================================================================= */
+        Iterator const Begin() const;
+        /* ================================================================= */
+        /**
+         * Gets the beginning element of the children.
+         * @returns             The iterator pointing to the beginning of
+         *                      the children list.
+        **/
+        /* ================================================================= */
         Iterator const CBegin() const;
         /* ================================================================= */
         /**
@@ -349,6 +373,14 @@ namespace Ludus
         **/
         /* ================================================================= */
         Iterator End();
+        /* ================================================================= */
+        /**
+         * Gets the ending element of the children.
+         * @returns             The iterator pointing to the end of
+         *                      the children list.
+        **/
+        /* ================================================================= */
+        Iterator const End() const;
         /* ================================================================= */
         /**
          * Gets the ending element of the children.

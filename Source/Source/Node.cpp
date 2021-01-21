@@ -96,7 +96,17 @@ namespace Ludus
         throw NodeNotFound(name);
     }
 
+    size_t Node::Size() const
+    {
+        return 0u;
+    }
+
     Node::Iterator Node::begin()
+    {
+        return Iterator(nullptr);
+    }
+
+    Node::Iterator const Node::begin() const
     {
         return Iterator(nullptr);
     }
@@ -111,6 +121,11 @@ namespace Ludus
         return Iterator(nullptr);
     }
 
+    Node::Iterator const Node::end() const
+    {
+        return Iterator(nullptr);
+    }
+
     Node::Iterator const Node::cend() const
     {
         return Iterator(nullptr);
@@ -121,12 +136,22 @@ namespace Ludus
         return begin();
     }
 
+    Node::Iterator const Node::Begin() const
+    {
+        return begin();
+    }
+
     Node::Iterator const Node::CBegin() const
     {
         return cbegin();
     }
 
     Node::Iterator Node::End()
+    {
+        return end();
+    }
+
+    Node::Iterator const Node::End() const
     {
         return end();
     }
