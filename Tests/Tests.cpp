@@ -125,6 +125,10 @@ TEST_CASE("Traversing using an index.")
             REQUIRE(true);
         }
     }
+    SECTION("Traversing the node through iterators")
+    {
+        
+    }
 }
 
 /*  ======================================================================== */
